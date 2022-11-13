@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [hex, setHex] = useState("");
+
+  const randomHex = () => {
+    const randomHex = Math.ceil(Math.random() * 0xffffff).toString(16);
+
+    if (randomHex.length < 6) {
+      //this is lazy but quick
+      return randomHex + "0";
+    }
+    return randomHex;
+  };
+
+  const boxStyles = {
+    backgroundColor: "#" + hex,
+    height: "300px",
+    width: "300px",
+  };
+
+  useEffect(() => {
+    setHex(randomHex());
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="wrapper">
+        <div style={boxStyles}></div>
+        <p>{hex}</p>
+        <button className="button" onClick={() => setHex(randomHex())}>
+          generate new number
+        </button>
+      </div>
     </div>
   );
 }
