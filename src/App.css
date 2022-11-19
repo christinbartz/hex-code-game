@@ -8,6 +8,11 @@
   align-items: center;
 }
 
-.button {
+.btn {
   width: auto;
+}
+
+.btnWrapper {
+  column-gap: 1rem;
+  display: flex;
 }
